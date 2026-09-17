@@ -9,12 +9,16 @@ English → Traditional Chinese translation of the **S.A.I. Leisure Group Compan
 
 | File | What it is |
 |---|---|
-| `index.html` | Rendered translation, section 1 (pages 1–24). This is what GitHub Pages serves. |
-| `chunk1.html` | The raw translation fragment as produced by the pipeline — no wrapper, no styling. |
+| `index.html` | The page GitHub Pages serves. Holds the wrapper only — charset, Traditional Chinese serif font stack, per-page cards, responsive tables — and no translated text. |
+| `chunk1.html`, `chunk2.html`, … | Raw translation fragments as produced by the pipeline — no wrapper, no styling. |
 
-`index.html` is `chunk1.html` wrapped in a full HTML document: UTF-8 charset declaration,
-a Traditional Chinese serif font stack, per-page cards, and responsive tables. The
-translated text itself is byte-identical between the two files.
+`index.html` stitches the chunks together in the browser: it fetches `chunk1.html`,
+`chunk2.html`, … in order and stops at the first one that does not exist. To publish a new
+section, add the next `chunkN.html` — numbering must be contiguous, and `index.html` does
+not change. The page range in the header is derived from the loaded pages.
+
+Local preview needs a web server (`fetch` is blocked on `file://`):
+`python3 -m http.server`, then open http://localhost:8000/.
 
 ## Note
 
